@@ -1,15 +1,15 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
+    ext.kotlin_version = '1.1.2-5'
+
     repositories {
         jcenter()
         maven { url 'https://maven.google.com' }
     }
     dependencies {
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.2-5'
+        classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.9'
         classpath 'com.android.tools.build:gradle:2.3.3'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -22,4 +22,21 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext{
+    min_sdk_version = 16
+    target_sdk_version = 25
+    compile_sdk_version = 25
+
+    junit_version = '4.12'
+
+    retrofit_version = '2.3.0'
+    okhttp_version = '3.8.0'
+    android_support_version = '25.4.0'
+    glide_version = '3.8.0'
+    rxjava_version = '2.1.0'
+    rxandroid_version = '2.0.1'
+    junit_version = '4.12'
+    espresso_version = '2.2.2'
 }

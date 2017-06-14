@@ -10,23 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ComicListActivity"
+            android:name="com.example.kkocel.marvel.list.ListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
+            <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ComicDetailActivity"
             android:label="@string/title_comic_detail"
-            android:parentActivityName=".ComicListActivity"
+            android:parentActivityName=".list.ListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.kkocel.marvel.ComicListActivity" />
+                android:value="com.example.kkocel.marvel.list.ListActivity" />
         </activity>
     </application>
 
