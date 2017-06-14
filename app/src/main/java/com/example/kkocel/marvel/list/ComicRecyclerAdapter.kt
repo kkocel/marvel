@@ -3,7 +3,7 @@ package com.example.kkocel.marvel.list
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.example.kkocel.marvel.Comic
+import com.example.kkocel.marvel.model.Comic
 import com.example.kkocel.marvel.R
 
 internal class ComicRecyclerAdapter : RecyclerView.Adapter<ListViewHolder>() {
@@ -14,8 +14,7 @@ internal class ComicRecyclerAdapter : RecyclerView.Adapter<ListViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.comic_list_content, parent, false)
-        return ListViewHolder(view)
+        return ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.comic_list_content, parent, false))
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
@@ -23,7 +22,7 @@ internal class ComicRecyclerAdapter : RecyclerView.Adapter<ListViewHolder>() {
     }
 
     override fun getItemId(position: Int): Long {
-        return comics[position].id.toLong()
+        return comics[position].id
     }
 
     override fun getItemCount(): Int {

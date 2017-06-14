@@ -6,6 +6,10 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.example.kkocel.marvel.R
+import com.example.kkocel.marvel.list.di.ListModule
+import com.example.kkocel.marvel.list.mvp.ListPresenter
+import com.example.kkocel.marvel.list.mvp.ListView
+import com.example.kkocel.marvel.network.rest.RetrofitModule
 import kotlinx.android.synthetic.main.activity_comic_list.*
 
 open class ListActivity : AppCompatActivity(), ListView {
@@ -13,49 +17,47 @@ open class ListActivity : AppCompatActivity(), ListView {
     private lateinit var adapter: ComicRecyclerAdapter
     private lateinit var endlessScrollListener: ListEndlessScrollListener
 
+    private lateinit var listPresenter: ListPresenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //App.getApp().getComponent().plus(ListModule()).inject(this)
-
         setContentView(R.layout.activity_comic_list)
+
+        val listModule = ListModule(RetrofitModule())
+        listPresenter = listModule.provideListPresenter(this)
+
+        listPresenter.onCreate()
 
         setSupportActionBar(toolbar)
         toolbar.title = title
 
         setupRecyclerView()
         setupRefreshLayout()
-        //setPresenterFactory { listPresenter }
-        //endlessScrollListener.setListPresenter(listPresenter)
+        endlessScrollListener.setListPresenter(listPresenter)
 
-        if (savedInstanceState == null) {
-            //getPresenter().startRequest()
-        }
     }
 
     private fun setupRecyclerView() {
         val layoutManager = GridLayoutManager(this, 2)
-        comic_list.layoutManager = layoutManager
-        comic_list.addItemDecoration(GridSpacingItemDecoration(2, spacing, true))
-        comic_list.itemAnimator = DefaultItemAnimator()
+        list.layoutManager = layoutManager
+        list.addItemDecoration(GridSpacingItemDecoration(2, resources.getDimensionPixelSize(R.dimen.detail_margin), true))
+        list.itemAnimator = DefaultItemAnimator()
         adapter = ComicRecyclerAdapter()
-        comic_list.adapter = adapter
+        list.adapter = adapter
         endlessScrollListener = ListEndlessScrollListener(layoutManager)
-        comic_list.addOnScrollListener(endlessScrollListener)
+        list.addOnScrollListener(endlessScrollListener)
     }
 
     private fun setupRefreshLayout() {
         refreshLayout.setOnRefreshListener {
-            //getPresenter().forceReload()
+            listPresenter.forceReload()
         }
     }
-
-    private val spacing: Int
-        get() = resources.getDimensionPixelSize(R.dimen.detail_margin)
 
     override fun onPageLoaded(page: ListPageViewState) {
 
         if (page is CorrectListPageViewState) {
-            if (page.page == 1) {
+            if (page.offset == 0) {
                 endlessScrollListener.resetState()
             }
             refreshLayout.isRefreshing = false
@@ -73,11 +75,16 @@ open class ListActivity : AppCompatActivity(), ListView {
         private lateinit var listPresenter: ListPresenter
 
         override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
-            listPresenter.requestNextPage()
+            listPresenter.requestNextPage(page * 100)
         }
 
         internal fun setListPresenter(listPresenter: ListPresenter) {
             this.listPresenter = listPresenter
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        listPresenter.onViewDestroyed()
     }
 }

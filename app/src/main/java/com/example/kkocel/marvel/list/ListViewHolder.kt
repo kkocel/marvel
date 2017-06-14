@@ -4,7 +4,7 @@ import android.content.Intent
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import com.bumptech.glide.Glide
-import com.example.kkocel.marvel.Comic
+import com.example.kkocel.marvel.model.Comic
 import com.example.kkocel.marvel.ComicDetailActivity
 import kotlinx.android.synthetic.main.comic_list_content.view.*
 
