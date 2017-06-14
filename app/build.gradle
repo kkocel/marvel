@@ -43,6 +43,8 @@ dependencies {
 
     compile "com.github.bumptech.glide:glide:$glide_version"
 
+    compile "com.github.pwittchen:reactivenetwork-rx2:$reactive_network_version"
+
     testCompile "junit:junit:$junit_version"
     androidTestCompile("com.android.support.test.espresso:espresso-core:$espresso_version", {
         exclude group: 'com.android.support', module: 'support-annotations'

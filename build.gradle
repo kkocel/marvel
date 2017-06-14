@@ -24,12 +24,14 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-ext{
+ext {
     min_sdk_version = 16
     target_sdk_version = 25
     compile_sdk_version = 25
 
     junit_version = '4.12'
+
+    reactive_network_version = '0.9.1'
 
     retrofit_version = '2.3.0'
     okhttp_version = '3.8.0'

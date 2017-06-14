@@ -2,4 +2,6 @@
     <string name="app_name">Marvel Character</string>
     <string name="title_comic_list">Comic List</string>
     <string name="title_comic_detail">Comic Details</string>
+    <string name="serious_problem">Something terrible happened</string>
+    <string name="no_network">Internet connection is unavailable</string>
 </resources>

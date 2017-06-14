@@ -94,4 +94,7 @@ abstract class EndlessScrollListener extends RecyclerView.OnScrollListener {
     // Defines the process for actually loading more data based on offset
     public abstract void onLoadMore(int page, int totalItemsCount, RecyclerView view);
 
+    public int getCurrentPage() {
+        return currentPage;
+    }
 }
