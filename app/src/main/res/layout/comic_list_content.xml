@@ -32,9 +32,10 @@
             android:paddingLeft="@dimen/comic_title_padding"
             android:paddingRight="@dimen/comic_title_padding"
             android:paddingTop="@dimen/comic_title_padding"
+            android:paddingBottom="10dp"
             android:textColor="@color/comicTitleColor"
             android:textSize="@dimen/comic_title_text_size"
-            tools:text="Title" />
+            tools:text="X-Men: Apocalypse" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

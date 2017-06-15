@@ -1,4 +1,4 @@
-package com.example.kkocel.marvel.list
+package com.example.kkocel.marvel.list.view
 
 import android.content.Context
 import com.bumptech.glide.load.model.stream.BaseGlideUrlLoader

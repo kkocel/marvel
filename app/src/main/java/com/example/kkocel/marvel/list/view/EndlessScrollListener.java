@@ -1,4 +1,4 @@
-package com.example.kkocel.marvel.list;
+package com.example.kkocel.marvel.list.view;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;

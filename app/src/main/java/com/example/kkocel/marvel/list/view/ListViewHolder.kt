@@ -1,14 +1,13 @@
-package com.example.kkocel.marvel.list;
+package com.example.kkocel.marvel.list.view;
 
 import android.content.Intent
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
+import android.support.v7.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.kkocel.marvel.detail.view.ComicDetailActivity
 import com.example.kkocel.marvel.model.Comic
-import com.example.kkocel.marvel.ComicDetailActivity
 import kotlinx.android.synthetic.main.comic_list_content.view.*
 
-class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class ListViewHolder(view: android.view.View) : RecyclerView.ViewHolder(view) {
 
     fun bindComic(comic: Comic) {
         val context = itemView.context

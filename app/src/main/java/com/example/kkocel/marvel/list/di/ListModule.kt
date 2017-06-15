@@ -1,21 +1,13 @@
 package com.example.kkocel.marvel.list.di
 
-import com.example.kkocel.marvel.list.mvp.ListPresenter
-import com.example.kkocel.marvel.list.mvp.ListView
-import com.example.kkocel.marvel.network.rest.MarvelApiService
+import com.example.kkocel.marvel.di.BaseModule
 import com.example.kkocel.marvel.network.rest.RetrofitModule
+import com.example.kkocel.marvel.list.presenter.ListPresenter
+import com.example.kkocel.marvel.list.view.ListView
 
-class ListModule(val retrofitModule: RetrofitModule) {
+class ListModule(retrofitModule: RetrofitModule) : BaseModule(retrofitModule) {
 
-    companion object {
-        var marvelApiService: MarvelApiService? = null
-    }
-
-    fun provideMarvelApiService(): MarvelApiService {
-        return marvelApiService ?: retrofitModule.provideRetrofit().create(MarvelApiService::class.java)
-    }
-
-    fun provideListPresenter(listView: ListView): ListPresenter{
-        return ListPresenter(listView, provideMarvelApiService())
+    fun provideListPresenter(listView: ListView): ListPresenter {
+        return ListPresenter(listView, provideMarvelRepository())
     }
 }

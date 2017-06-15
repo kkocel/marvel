@@ -1,13 +1,13 @@
-package com.example.kkocel.marvel.list
+package com.example.kkocel.marvel.list.view
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.example.kkocel.marvel.model.Comic
 import com.example.kkocel.marvel.R
+import com.example.kkocel.marvel.model.Comic
 
 internal class ComicRecyclerAdapter : RecyclerView.Adapter<ListViewHolder>() {
-    private var comics = emptyList<Comic>()
+    private var comics = mutableListOf<Comic>()
 
     init {
         setHasStableIds(true)
@@ -22,7 +22,7 @@ internal class ComicRecyclerAdapter : RecyclerView.Adapter<ListViewHolder>() {
     }
 
     override fun getItemId(position: Int): Long {
-        return comics[position].id
+        return comics[position].id?.toLong() ?: 0L
     }
 
     override fun getItemCount(): Int {
@@ -30,9 +30,8 @@ internal class ComicRecyclerAdapter : RecyclerView.Adapter<ListViewHolder>() {
     }
 
     fun swapList(comics: List<Comic>?) {
-        this.comics = comics ?: emptyList<Comic>()
+        if (comics != null) this.comics.addAll(comics)
         notifyDataSetChanged()
     }
-
 }
 

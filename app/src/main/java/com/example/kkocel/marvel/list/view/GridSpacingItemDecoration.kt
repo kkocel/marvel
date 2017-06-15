@@ -1,12 +1,12 @@
-package com.example.kkocel.marvel.list
+package com.example.kkocel.marvel.list.view
 
 import android.graphics.Rect
 import android.support.v7.widget.RecyclerView
 import android.view.View
 
-class GridSpacingItemDecoration(private val spanCount: Int, private val spacing: Int, private val includeEdge: Boolean) : RecyclerView.ItemDecoration() {
+class GridSpacingItemDecoration(private val spanCount: Int, private val spacing: Int, private val includeEdge: Boolean) : android.support.v7.widget.RecyclerView.ItemDecoration() {
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State?) {
+    override fun getItemOffsets(outRect: android.graphics.Rect, view: android.view.View, parent: android.support.v7.widget.RecyclerView, state: android.support.v7.widget.RecyclerView.State?) {
         val position = parent.getChildAdapterPosition(view)
         val column = position % spanCount
 

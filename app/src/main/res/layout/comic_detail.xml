@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="false"
     android:orientation="vertical"
-    tools:context="com.example.kkocel.marvel.ComicDetailActivity"
+    tools:context="com.example.kkocel.marvel.detail.view.ComicDetailActivity"
     tools:parentTag="ScrollView">
 
     <RelativeLayout
