@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">Marvel Character</string>
-    <string name="title_comic_list">Comic List</string>
-    <string name="title_comic_detail">Comic Details</string>
-    <string name="serious_problem">Something terrible happened</string>
-    <string name="no_network">Internet connection is unavailable</string>
+    <string name="appName">Marvel Character</string>
+    <string name="titleComicList">Comic List</string>
+    <string name="titleComicDetail">Comic Details</string>
+    <string name="seriousProblem">Something terrible happened</string>
+    <string name="noNetwork">Internet connection is unavailable</string>
+    <string name="emptyTitle">No title available</string>
+    <string name="emptyDescription">No description available</string>
 </resources>

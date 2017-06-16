@@ -1,5 +1,7 @@
 package com.example.kkocel.marvel.detail.state
 
+import com.example.kkocel.marvel.MarvelApplication
+import com.example.kkocel.marvel.R
 import com.example.kkocel.marvel.network.model.ComicDetailModel
 import com.example.kkocel.marvel.network.model.ImageModel
 import com.example.kkocel.marvel.state.ViewState
@@ -9,12 +11,12 @@ class ComicDetailViewState(
         val title: String?,
         val description: String?,
         val thumbnail: ImageModel?,
-        val images: List<ImageModel>?) : ViewState {
+        val image: ImageModel?) : ViewState {
 
     constructor(comicDetailModel: ComicDetailModel) : this(
             id = comicDetailModel.id,
-            title = comicDetailModel.title,
-            description = comicDetailModel.description,
+            title = comicDetailModel.title ?: MarvelApplication.marvelApplication?.getString(R.string.emptyTitle),
+            description = comicDetailModel.description ?: MarvelApplication.marvelApplication?.getString(R.string.emptyDescription),
             thumbnail = comicDetailModel.thumbnail,
-            images = comicDetailModel.images)
+            image = comicDetailModel.images?.firstOrNull() ?: comicDetailModel.thumbnail)
 }

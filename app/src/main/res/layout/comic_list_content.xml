@@ -18,17 +18,17 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/comic_thumbnail"
+            android:id="@+id/imgListComicThumbnail"
             android:layout_width="match_parent"
             android:layout_height="@dimen/card_comic_image_height"
             android:scaleType="fitCenter"
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/comic_name"
+            android:id="@+id/txtListComicName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/comic_thumbnail"
+            android:layout_below="@id/imgListComicThumbnail"
             android:paddingLeft="@dimen/comic_title_padding"
             android:paddingRight="@dimen/comic_title_padding"
             android:paddingTop="@dimen/comic_title_padding"

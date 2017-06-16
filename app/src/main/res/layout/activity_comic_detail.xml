@@ -10,38 +10,40 @@
     tools:context=".detail.view.ComicDetailActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/tlbDetailToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
 
-    <ScrollView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swpDetailRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="false"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="top"
-            android:padding="10dp">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="false"
+            android:orientation="vertical">
 
             <android.support.v7.widget.CardView
+                android:id="@+id/crdDetailContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/detail_margin"
                 android:layout_marginLeft="@dimen/detail_margin"
                 android:layout_marginRight="@dimen/detail_margin"
+                android:layout_marginTop="10dp"
                 android:elevation="3dp"
+                android:padding="10dp"
+                android:visibility="invisible"
                 card_view:cardCornerRadius="@dimen/card_comic_radius"
                 tools:targetApi="lollipop">
 
@@ -50,23 +52,18 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/detail_backdrop"
+                        android:id="@+id/imgDetailBackdrop"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/details_backdrop_height"
                         android:elevation="4dp"
                         android:scaleType="centerCrop"
+                        android:background="#4C000000"
                         tools:ignore="ContentDescription" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:alpha="0.3"
-                        android:background="#000000" />
-
                     <ImageView
-                        android:id="@+id/detail_comic_image"
-                        android:layout_width="70dp"
-                        android:layout_height="100dp"
+                        android:id="@+id/imgDetailThumbnail"
+                        android:layout_width="105dp"
+                        android:layout_height="150dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
@@ -79,16 +76,16 @@
                         tools:ignore="ContentDescription" />
 
                     <TextView
-                        android:id="@+id/detail_comic_name"
+                        android:id="@+id/txtDetailComicName"
                         style="@style/ShadowOverlayText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/detail_backdrop"
+                        android:layout_alignBottom="@+id/imgDetailBackdrop"
                         android:layout_marginBottom="@dimen/detail_margin"
                         android:layout_marginLeft="@dimen/detail_margin"
                         android:layout_marginStart="@dimen/detail_margin"
-                        android:layout_toEndOf="@+id/detail_comic_image"
-                        android:layout_toRightOf="@+id/detail_comic_image"
+                        android:layout_toEndOf="@+id/imgDetailThumbnail"
+                        android:layout_toRightOf="@+id/imgDetailThumbnail"
                         android:elevation="5dp"
                         android:maxLines="1"
                         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -97,17 +94,17 @@
                         tools:text="Comic name here" />
 
                     <TextView
-                        android:id="@+id/detail_comic_overview"
+                        android:id="@+id/txtDetailComicOverview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/detail_backdrop"
+                        android:layout_below="@+id/imgDetailBackdrop"
                         android:layout_marginBottom="@dimen/detail_margin"
                         android:layout_marginEnd="@dimen/detail_margin"
                         android:layout_marginLeft="@dimen/detail_margin"
                         android:layout_marginStart="@dimen/detail_margin"
                         android:layout_marginTop="5dp"
-                        android:layout_toEndOf="@+id/detail_comic_image"
-                        android:layout_toRightOf="@+id/detail_comic_image"
+                        android:layout_toEndOf="@+id/imgDetailThumbnail"
+                        android:layout_toRightOf="@+id/imgDetailThumbnail"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textSize="@dimen/text_size"
                         tools:text="Comic overview" />
@@ -115,6 +112,6 @@
                 </RelativeLayout>
 
             </android.support.v7.widget.CardView>
-        </RelativeLayout>
-    </ScrollView>
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

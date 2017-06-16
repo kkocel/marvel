@@ -1,32 +1,27 @@
 package com.example.kkocel.marvel.list.view
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.example.kkocel.marvel.R
-import com.example.kkocel.marvel.network.rest.RetrofitModule
 import com.example.kkocel.marvel.list.di.ListModule
 import com.example.kkocel.marvel.list.presenter.ListPresenter
 import com.example.kkocel.marvel.list.state.CorrectListPageViewState
+import com.example.kkocel.marvel.network.rest.RetrofitModule
 import com.example.kkocel.marvel.state.ConnectionErrorViewState
-import com.example.kkocel.marvel.state.ViewState
-import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import com.example.kkocel.marvel.view.displaySnackbar
 import kotlinx.android.synthetic.main.activity_comic_list.*
 
 open class ListActivity : AppCompatActivity(), ListView {
+
 
     private lateinit var adapter: ComicRecyclerAdapter
     private lateinit var endlessScrollListener: ListEndlessScrollListener
 
     private lateinit var listPresenter: ListPresenter
 
-    private var subscriptions = io.reactivex.disposables.CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,16 +29,18 @@ open class ListActivity : AppCompatActivity(), ListView {
 
         val listModule = ListModule(RetrofitModule())
         listPresenter = listModule.provideListPresenter(this)
-
         listPresenter.onCreate()
 
-        setSupportActionBar(toolbar)
-        toolbar.title = title
-
+        setupToolbar()
         setupRecyclerView()
         setupRefreshLayout()
         endlessScrollListener.setListPresenter(listPresenter)
 
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(tlbListToolbar)
+        tlbListToolbar.title = title
     }
 
     private fun setupRecyclerView() {
@@ -58,51 +55,31 @@ open class ListActivity : AppCompatActivity(), ListView {
     }
 
     private fun setupRefreshLayout() {
-        refreshLayout.setOnRefreshListener {
+        swpListRefreshLayout.setOnRefreshListener {
             listPresenter.forceReload()
         }
-        refreshLayout.isRefreshing = true
+        swpListRefreshLayout.isRefreshing = true
     }
 
-    override fun onPageLoaded(page: ViewState) {
-        if (page is CorrectListPageViewState) {
-            if (page.offset == 0) {
-                endlessScrollListener.resetState()
-            }
-            refreshLayout.isRefreshing = false
-            adapter.swapList(page.comics)
-        } else if (page is ConnectionErrorViewState) {
-            displaySnackbar(getString(R.string.no_network))
-            retryWhenNetworkIsAvailable()
+    override fun onPageLoaded(page: CorrectListPageViewState) {
+        if (page.offset == 0) {
+            endlessScrollListener.resetState()
         }
+        swpListRefreshLayout.isRefreshing = false
+        adapter.swapList(page.comics)
     }
 
-    // TODO: Handle situations where internet is available but server is down
-    private fun retryWhenNetworkIsAvailable() {
-        subscriptions.add(ReactiveNetwork.observeInternetConnectivity()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ isConnectedToInternet ->
-                    if (isConnectedToInternet) {
-                        listPresenter.retryCurrentPage(pageToOffset(endlessScrollListener.currentPage))
-                        dispose()
-                    }
-                }))
-    }
-
-    private fun dispose() {
-        subscriptions.dispose()
-        subscriptions = CompositeDisposable()
+    override fun onNetworkError(it: ConnectionErrorViewState) {
+        displaySnackbar(getString(R.string.noNetwork))
+        listPresenter.retryWhenNetworkIsAvailable(endlessScrollListener.currentPage)
     }
 
     override fun onUnrecoverableError(throwable: Throwable) {
-        displaySnackbar(getString(com.example.kkocel.marvel.R.string.serious_problem))
+        displaySnackbar(getString(R.string.seriousProblem))
+        // TODO: Log to Crashlytics?
     }
 
-    fun displaySnackbar(message: String) = Snackbar.make(findViewById(R.id.list_root)!!, message, Snackbar.LENGTH_LONG).show()
-
-
-    private class ListEndlessScrollListener internal constructor(layoutManager: GridLayoutManager) : EndlessScrollListener(layoutManager) {
+    private class ListEndlessScrollListener(layoutManager: GridLayoutManager) : EndlessScrollListener(layoutManager) {
         private lateinit var listPresenter: ListPresenter
 
         override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
@@ -117,7 +94,6 @@ open class ListActivity : AppCompatActivity(), ListView {
     override fun onDestroy() {
         super.onDestroy()
         listPresenter.onViewDestroyed()
-        subscriptions.dispose()
     }
 
     companion object {
