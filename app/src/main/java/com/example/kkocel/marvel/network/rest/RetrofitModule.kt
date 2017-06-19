@@ -17,10 +17,18 @@ class RetrofitModule {
     private val PUBLIC_KEY = "6a7ed890b4b941a925202a5630d5b162"
     private val PRIVATE_KEY = "0f1d0fdf46a0bf32f962b0b9997233c0395cdf8e"
 
+    companion object {
+        var baseUrl: String? = null
+    }
+
+    fun provideBaseUrl(): String {
+        return baseUrl ?: "http://gateway.marvel.com/v1/public/"
+    }
+
     fun provideRetrofit(): Retrofit = makeRetrofit(addRequiredQuery())
 
     fun makeRetrofit(vararg interceptors: Interceptor): Retrofit = Retrofit.Builder()
-            .baseUrl("http://gateway.marvel.com/v1/public/")
+            .baseUrl(provideBaseUrl())
             .client(makeHttpClient(interceptors))
             .addConverters()
             .build()

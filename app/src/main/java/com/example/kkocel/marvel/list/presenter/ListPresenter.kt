@@ -1,9 +1,8 @@
 package com.example.kkocel.marvel.list.presenter
 
 import com.example.kkocel.marvel.list.state.CorrectListPageViewState
-import com.example.kkocel.marvel.list.view.ListActivity
-import com.example.kkocel.marvel.network.MarvelRepository
 import com.example.kkocel.marvel.list.view.ListView
+import com.example.kkocel.marvel.network.MarvelRepository
 import com.example.kkocel.marvel.state.ConnectionErrorViewState
 import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -46,7 +45,7 @@ class ListPresenter(val listView: ListView, val marvelRepository: MarvelReposito
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ isConnectedToInternet ->
                     if (isConnectedToInternet) {
-                        retryCurrentPage(ListActivity.pageToOffset(currentPage))
+                        retryCurrentPage(pageToOffset(currentPage))
                     }
                 }))
     }
@@ -58,4 +57,8 @@ class ListPresenter(val listView: ListView, val marvelRepository: MarvelReposito
     fun forceReload() = pageRequests.onNext(INITIAL_OFFSET)
 
     fun onViewDestroyed() = subscriptions.dispose()
+
+    companion object {
+        fun pageToOffset(page: Int) = page * 100
+    }
 }

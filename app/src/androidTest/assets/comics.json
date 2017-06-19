@@ -1,0 +1,313 @@
+{
+  "code": 200,
+  "status": "Ok",
+  "copyright": "© 2017 MARVEL",
+  "attributionText": "Data provided by Marvel. © 2017 MARVEL",
+  "attributionHTML": "<a href=\"http://marvel.com\">Data provided by Marvel. © 2017 MARVEL</a>",
+  "etag": "95437e9f2f12c380713405037df801a8718cef4f",
+  "data": {
+    "offset": 0,
+    "limit": 20,
+    "total": 2,
+    "count": 20,
+    "results": [
+      {
+        "id": 16235,
+        "digitalId": 0,
+        "title": "Cap Transport (2005) #15",
+        "issueNumber": 15,
+        "variantDescription": "",
+        "description": null,
+        "modified": "-0001-11-30T00:00:00-0500",
+        "isbn": "",
+        "upc": "",
+        "diamondCode": "",
+        "ean": "",
+        "issn": "",
+        "format": "Comic",
+        "pageCount": 0,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/16235",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/issue/16235/cap_transport_2005_15?utm_campaign=apiRef&utm_source=6a7ed890b4b941a925202a5630d5b162"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/2722",
+          "name": "Cap Transport (2005 - 2006)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2029-12-31T00:00:00-0500"
+          },
+          {
+            "type": "focDate",
+            "date": "-0001-11-30T00:00:00-0500"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 0
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 8,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/16235/creators",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/2133",
+              "name": "Tom Brevoort",
+              "role": "editor"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/5248",
+              "name": "Molly Lazer",
+              "role": "editor"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/4371",
+              "name": "Andy Schmidt",
+              "role": "editor"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/367",
+              "name": "Ed Brubaker",
+              "role": "writer"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/5251",
+              "name": "Joe Caramagna",
+              "role": "letterer"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/8504",
+              "name": "Frank D'Armata",
+              "role": "colorist"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/374",
+              "name": "Steve Epting",
+              "role": "penciler"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/708",
+              "name": "Mike Perkins",
+              "role": "penciler"
+            }
+          ],
+          "returned": 8
+        },
+        "characters": {
+          "available": 2,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/16235/characters",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/characters/1009220",
+              "name": "Captain America"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/characters/1009535",
+              "name": "Red Skull"
+            }
+          ],
+          "returned": 2
+        },
+        "stories": {
+          "available": 3,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/16235/stories",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/33995",
+              "name": "Cover #33995",
+              "type": "cover"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/33996",
+              "name": "Red is the Darkest Color",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/33997",
+              "name": "Marvel Heroes Hotspot",
+              "type": "promo"
+            }
+          ],
+          "returned": 3
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/16235/events",
+          "items": [],
+          "returned": 0
+        }
+      },
+      {
+        "id": 16246,
+        "digitalId": 0,
+        "title": "Cap Transport (2005) #7",
+        "issueNumber": 7,
+        "variantDescription": "",
+        "description": null,
+        "modified": "-0001-11-30T00:00:00-0500",
+        "isbn": "",
+        "upc": "",
+        "diamondCode": "",
+        "ean": "",
+        "issn": "",
+        "format": "Comic",
+        "pageCount": 0,
+        "textObjects": [],
+        "resourceURI": "http://gateway.marvel.com/v1/public/comics/16246",
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/issue/16246/cap_transport_2005_7?utm_campaign=apiRef&utm_source=6a7ed890b4b941a925202a5630d5b162"
+          }
+        ],
+        "series": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/series/2722",
+          "name": "Cap Transport (2005 - 2006)"
+        },
+        "variants": [],
+        "collections": [],
+        "collectedIssues": [],
+        "dates": [
+          {
+            "type": "onsaleDate",
+            "date": "2029-12-31T00:00:00-0500"
+          },
+          {
+            "type": "focDate",
+            "date": "-0001-11-30T00:00:00-0500"
+          }
+        ],
+        "prices": [
+          {
+            "type": "printPrice",
+            "price": 0
+          }
+        ],
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available",
+          "extension": "jpg"
+        },
+        "images": [],
+        "creators": {
+          "available": 9,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/16246/creators",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/2133",
+              "name": "Tom Brevoort",
+              "role": "editor"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/5248",
+              "name": "Molly Lazer",
+              "role": "editor"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/4371",
+              "name": "Andy Schmidt",
+              "role": "editor"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/367",
+              "name": "Ed Brubaker",
+              "role": "writer"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/7129",
+              "name": "Virtual Calligraphy",
+              "role": "letterer"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/8635",
+              "name": "Randy Gentile",
+              "role": "letterer"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/8504",
+              "name": "Frank D'Armata",
+              "role": "colorist"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/374",
+              "name": "Steve Epting",
+              "role": "penciler"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/creators/127",
+              "name": "John Paul Leon",
+              "role": "penciler"
+            }
+          ],
+          "returned": 9
+        },
+        "characters": {
+          "available": 4,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/16246/characters",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/characters/1009220",
+              "name": "Captain America"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/characters/1009475",
+              "name": "Nomad"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/characters/1009565",
+              "name": "Scourge"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/characters/1010791",
+              "name": "Sub-Mariner"
+            }
+          ],
+          "returned": 4
+        },
+        "stories": {
+          "available": 3,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/16246/stories",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/34018",
+              "name": "Cover #34018",
+              "type": "cover"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/34019",
+              "name": "The Lonesome Death of Jack Monroe",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/34020",
+              "name": "Freedom of Speech",
+              "type": "letters"
+            }
+          ],
+          "returned": 3
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/comics/16246/events",
+          "items": [],
+          "returned": 0
+        }
+      }
+    ]
+  }
+}

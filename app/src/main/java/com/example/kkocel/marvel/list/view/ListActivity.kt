@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import com.example.kkocel.marvel.R
 import com.example.kkocel.marvel.list.di.ListModule
 import com.example.kkocel.marvel.list.presenter.ListPresenter
+import com.example.kkocel.marvel.list.presenter.ListPresenter.Companion.pageToOffset
 import com.example.kkocel.marvel.list.state.CorrectListPageViewState
 import com.example.kkocel.marvel.network.rest.RetrofitModule
 import com.example.kkocel.marvel.state.ConnectionErrorViewState
@@ -15,7 +16,6 @@ import com.example.kkocel.marvel.view.displaySnackbar
 import kotlinx.android.synthetic.main.activity_comic_list.*
 
 open class ListActivity : AppCompatActivity(), ListView {
-
 
     private lateinit var adapter: ComicRecyclerAdapter
     private lateinit var endlessScrollListener: ListEndlessScrollListener
@@ -46,12 +46,12 @@ open class ListActivity : AppCompatActivity(), ListView {
     private fun setupRecyclerView() {
         val layoutManager = GridLayoutManager(this, 2)
         adapter = ComicRecyclerAdapter()
-        list.layoutManager = layoutManager
-        list.addItemDecoration(GridSpacingItemDecoration(2, resources.getDimensionPixelSize(R.dimen.detail_margin), true))
-        list.itemAnimator = DefaultItemAnimator()
-        list.adapter = adapter
+        rclListRecycler.layoutManager = layoutManager
+        rclListRecycler.addItemDecoration(GridSpacingItemDecoration(2, resources.getDimensionPixelSize(R.dimen.detail_margin), true))
+        rclListRecycler.itemAnimator = DefaultItemAnimator()
+        rclListRecycler.adapter = adapter
         endlessScrollListener = ListEndlessScrollListener(layoutManager)
-        list.addOnScrollListener(endlessScrollListener)
+        rclListRecycler.addOnScrollListener(endlessScrollListener)
     }
 
     private fun setupRefreshLayout() {
@@ -94,9 +94,5 @@ open class ListActivity : AppCompatActivity(), ListView {
     override fun onDestroy() {
         super.onDestroy()
         listPresenter.onViewDestroyed()
-    }
-
-    companion object {
-        fun pageToOffset(page: Int) = page * 100
     }
 }

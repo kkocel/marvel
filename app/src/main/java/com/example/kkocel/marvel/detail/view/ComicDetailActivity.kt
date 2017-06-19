@@ -2,7 +2,9 @@ package com.example.kkocel.marvel.detail.view
 
 import android.app.ListActivity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
@@ -62,21 +64,30 @@ class ComicDetailActivity : AppCompatActivity(), DetailView {
 
     fun fadeIn(view: View) {
         val animate = AlphaAnimation(0f, 1f)
-        animate.duration = 500
+        animate.duration = (500 * animationMultiplier()).toLong()
         animate.fillAfter = true
         view.startAnimation(animate)
     }
 
+    @Suppress("DEPRECATION")
+    fun animationMultiplier(): Float =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                Settings.Global.getFloat(contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f)
+            } else {
+                Settings.System.getFloat(contentResolver, Settings.System.ANIMATOR_DURATION_SCALE, 1f)
+            }
+
     override fun onDetailsLoaded(detailViewState: ComicDetailViewState) {
         crdDetailContent.visibility = View.VISIBLE
-        fadeIn(crdDetailContent)
-        swpDetailRefreshLayout.isRefreshing = false
-        txtDetailComicName.text = detailViewState.title
-        txtDetailComicOverview.text = detailViewState.description
         Glide.with(this).using(ThumbnailUrlLoader(this)).load(detailViewState.thumbnail).into(imgDetailThumbnail)
         Glide.with(this).using(BackdropDetailUrlLoader(this)).load(detailViewState.image)
                 .bitmapTransform(BlurTransformation(this, 10))
                 .into(imgDetailBackdrop)
+        fadeIn(crdDetailContent)
+        swpDetailRefreshLayout.isRefreshing = false
+        txtDetailComicName.text = detailViewState.title
+        txtDetailComicOverview.text = detailViewState.description
+
     }
 
     override fun onNetworkError(detailViewState: ConnectionErrorViewState) {
