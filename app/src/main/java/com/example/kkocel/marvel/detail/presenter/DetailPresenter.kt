@@ -7,6 +7,7 @@ import com.example.kkocel.marvel.state.ConnectionErrorViewState
 import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
 class DetailPresenter(val detailView: DetailView, val marvelRepository: MarvelRepository) {
@@ -17,14 +18,14 @@ class DetailPresenter(val detailView: DetailView, val marvelRepository: MarvelRe
         marvelRepository.getComicDetails(comicId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        {
-                            when {
-                                it is ComicDetailViewState -> detailView.onDetailsLoaded(it)
+                .subscribeBy(
+                        onNext = {
+                            when (it) {
+                                is ComicDetailViewState -> detailView.onDetailsLoaded(it)
                                 else -> detailView.onNetworkError(it as ConnectionErrorViewState)
                             }
                         },
-                        { e -> detailView.onUnrecoverableError(e) }
+                        onError = { e -> detailView.onUnrecoverableError(e) }
                 )
     }
 
@@ -33,11 +34,12 @@ class DetailPresenter(val detailView: DetailView, val marvelRepository: MarvelRe
         subscriptions.add(ReactiveNetwork.observeInternetConnectivity()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ isConnectedToInternet ->
-                    if (isConnectedToInternet) {
-                        onCreate(comicId)
-                    }
-                }))
+                .subscribeBy(
+                        onNext = { isConnectedToInternet ->
+                            when {
+                                isConnectedToInternet -> onCreate(comicId)
+                            }
+                        }))
     }
 
     fun forceReload(comicId: Int) = onCreate(comicId)

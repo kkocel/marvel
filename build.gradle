@@ -41,6 +41,7 @@ ext {
     glide_transformations_version = '2.0.2'
 
     rxjava_version = '2.1.0'
+    rxkotlin_version = '2.0.3'
     rxandroid_version = '2.0.1'
     reactive_network_version = '0.9.1'
 
@@ -54,4 +55,6 @@ ext {
     support_test = '0.5'
     espresso_version = '2.2.2'
     ui_automator_version = '2.1.2'
+
+    rest_mock_android_version = '0.2.1'
 }

@@ -3,15 +3,15 @@ package com.example.kkocel.marvel.list.presenter
 import com.example.kkocel.marvel.list.state.CorrectListPageViewState
 import com.example.kkocel.marvel.list.view.ListView
 import com.example.kkocel.marvel.network.MarvelRepository
+import com.example.kkocel.marvel.network.applySchedulers
 import com.example.kkocel.marvel.state.ConnectionErrorViewState
 import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.subjects.PublishSubject
 
 class ListPresenter(val listView: ListView, val marvelRepository: MarvelRepository) {
-    private val CAPTAIN_AMERICA = 1009220
+    private val BEN_PARKER = 1009489
     private val INITIAL_OFFSET = 0
     private val ITEMS = 100
 
@@ -21,33 +21,31 @@ class ListPresenter(val listView: ListView, val marvelRepository: MarvelReposito
     fun onCreate() {
         subscriptions.add(pageRequests.startWith(INITIAL_OFFSET)
                 .flatMap { page ->
-                    marvelRepository.getComicsForCharacter(CAPTAIN_AMERICA, page, ITEMS)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
+                    marvelRepository.getComicsForCharacter(BEN_PARKER, page, ITEMS)
+                            .applySchedulers()
                 }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        {
-                            when {
-                                it is CorrectListPageViewState -> listView.onPageLoaded(it)
+                .applySchedulers()
+                .subscribeBy(
+                        onNext = {
+                            when (it) {
+                                is CorrectListPageViewState -> listView.onPageLoaded(it)
                                 else -> listView.onNetworkError(it as ConnectionErrorViewState)
                             }
                         },
-                        { e -> listView.onUnrecoverableError(e) }
+                        onError = { e -> listView.onUnrecoverableError(e) }
                 ))
     }
 
     // TODO: Handle situations where internet is available but server is down
     fun retryWhenNetworkIsAvailable(currentPage: Int) {
         subscriptions.add(ReactiveNetwork.observeInternetConnectivity()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ isConnectedToInternet ->
-                    if (isConnectedToInternet) {
-                        retryCurrentPage(pageToOffset(currentPage))
-                    }
-                }))
+                .applySchedulers()
+                .subscribeBy(
+                        onNext = { isConnectedToInternet ->
+                            if (isConnectedToInternet) {
+                                retryCurrentPage(pageToOffset(currentPage))
+                            }
+                        }))
     }
 
     private fun retryCurrentPage(currentOffset: Int) = pageRequests.onNext(currentOffset)
@@ -59,6 +57,7 @@ class ListPresenter(val listView: ListView, val marvelRepository: MarvelReposito
     fun onViewDestroyed() = subscriptions.dispose()
 
     companion object {
+        @JvmStatic
         fun pageToOffset(page: Int) = page * 100
     }
 }

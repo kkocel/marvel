@@ -57,7 +57,7 @@
                         android:layout_height="@dimen/details_backdrop_height"
                         android:elevation="4dp"
                         android:scaleType="centerCrop"
-                        android:background="#4C000000"
+                        android:background="@color/colorPrimaryDark"
                         tools:ignore="ContentDescription" />
 
                     <ImageView
@@ -89,7 +89,7 @@
                         android:elevation="5dp"
                         android:maxLines="1"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textColor="#ffffff"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/title_text_size"
                         tools:text="Comic name here" />
 

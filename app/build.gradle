@@ -39,6 +39,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     compile "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    compile "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
     compile "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
 
     compile(["com.squareup.retrofit2:retrofit:$retrofit_version",
@@ -59,12 +60,10 @@ dependencies {
     compile "com.github.pwittchen:reactivenetwork-rx2:$reactive_network_version"
 
     testCompile "junit:junit:$junit_version"
-    androidTestCompile("com.android.support.test.espresso:espresso-core:$espresso_version", {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-
+    testCompile "org.spockframework:spock-core:$spock_core_version"
     testCompile "cglib:cglib-nodep:$cglib_version"
     testCompile "org.objenesis:objenesis:$objenesis_version"
+    testCompile "org.mockito:mockito-core:$mockito_version"
 
     androidTestCompile "org.codehaus.groovy:groovy:$grooid_version:grooid"
     androidTestCompile("org.spockframework:spock-core:$spock_core_version") {
@@ -82,12 +81,12 @@ dependencies {
         exclude group: 'com.android.support'
     })
 
-    androidTestCompile("com.github.andrzejchm.RESTMock:android:0.2.1") {
+    androidTestCompile("com.github.andrzejchm.RESTMock:android:$rest_mock_android_version") {
         exclude group: 'com.squareup.okhttp3', module: 'okio'
         exclude group: 'com.squareup.okhttp3', module: 'okhttp'
     }
 
-    androidTestCompile("org.mockito:mockito-core:$mockito_version")
+
 }
 repositories {
     mavenCentral()

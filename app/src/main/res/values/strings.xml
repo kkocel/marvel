@@ -1,5 +1,5 @@
 <resources>
-    <string name="appName">Marvel Character</string>
+    <string name="appName">Ben Parker</string>
     <string name="titleComicList">Comic List</string>
     <string name="titleComicDetail">Comic Details</string>
     <string name="seriousProblem">Something terrible happened</string>
